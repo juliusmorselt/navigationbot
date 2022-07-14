@@ -1,20 +1,29 @@
 import discord
+from interactions import Embed
+from matplotlib.pyplot import close
 import creds
+import embeds
 from discord.ext import commands
 
-client = commands.Bot(command_prefix='/')
+prefix = '/'
 
 class MyClient(discord.Client):
+
     async def on_ready(self):
-        print('Yes BITCH IM ONLINE!! as {0}!'.format(self.user))
+        print('Yow I am online as {0}!'.format(self.user))
     
+
+
     async def on_message(self, message):
         if message.author == client.user:
             return
-        
-        if message.content == "hello":
-            await message.channel.send('sup')
 
+
+
+    async def on_message(self, message):
+        if message.content == prefix + 'help':
+            await message.channel.send(embed=embeds.HELP_EMBED)
+                
 
 
 client = MyClient()
